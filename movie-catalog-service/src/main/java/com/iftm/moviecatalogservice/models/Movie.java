@@ -1,4 +1,4 @@
-package com.iftm.movieinfoservice.model;
+package com.iftm.moviecatalogservice.models;
 
 public class Movie {
 	
