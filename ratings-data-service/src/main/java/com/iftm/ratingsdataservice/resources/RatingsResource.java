@@ -13,8 +13,8 @@ import com.iftm.ratingsdataservice.models.UserRating;
 @RestController
 @RequestMapping("/ratingsdata")
 public class RatingsResource {
-	
-	@RequestMapping("/{movieId}")
+
+    @RequestMapping("/{movieId}")
     public Rating getRating(@PathVariable("movieId") String movieId) {
         return new Rating(movieId, 9);
     }
@@ -26,7 +26,8 @@ public class RatingsResource {
 				new Rating("1541",28)
 			);
     	UserRating userRating = new UserRating();
-    	userRating.setUserRating(ratings);
+    	userRating.setRatings(ratings);
     	return ratings;
     }
+
 }
