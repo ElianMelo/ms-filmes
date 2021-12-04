@@ -3,22 +3,20 @@ package com.iftm.moviecatalogservice.models;
 import java.util.List;
 
 public class UserRating {
-	private List<Rating> userRating;
+
+    private String userId;
+    private List<Rating> ratings;
+
+	public UserRating(String userId, List<Rating> ratings) {
+		this.userId = userId;
+		this.ratings = ratings;
+	}
+
+    public UserRating() {super();}
+	public String getUserId() {return userId;}
+    public void setUserId(String userId) {this.userId = userId;}
+    public List<Rating> getRatings() {return ratings;}
+    public void setRatings(List<Rating> ratings) {this.ratings = ratings;}
 	
-	public UserRating() {
-		super();
-	}
-
-	public UserRating(List<Rating> userRating) {
-		super();
-		this.userRating = userRating;
-	}
-
-	public List<Rating> getUserRating() {
-		return userRating;
-	}
-
-	public void setUserRating(List<Rating> userRating) {
-		this.userRating = userRating;
-	}
+	
 }
