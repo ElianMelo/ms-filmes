@@ -1,0 +1,12 @@
+https://www.themoviedb.org/
+---------------------------------------------
+To register for an API key, click the  from within your account settings page. You can also view the screenshots below for help:
+
+Click on your avatar or initials in the main navigation ()
+Click the "Settings" link ()
+Click the "API" link in the left sidebar ()
+Click "Create" or "click here" on the API page ()
+
+---------------------------------------------
+https://developers.themoviedb.org/3/getting-started/introduction
+httpswww.themoviedb.orgsettingsapi

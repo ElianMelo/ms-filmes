@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,20 +23,15 @@ public class CatalogResource {
 	//o Autowired aqui informa ao Spring que em algum lugar (MovieCatalogServiceApplication)
 	//existe um BEAN desse RestTemplate e o inject precisa desse dado e é injetado aqui
 	
-	@Autowired
-	private DiscoveryClient discoveryClient;
-	
     @RequestMapping("/{userId}")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
         UserRating userRating = restTemplate.getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
 
-        return userRating.getRatings().stream()
-                .map(rating -> {
-                    Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
-                    return new CatalogItem(movie.getName(), "FILMAÇO", rating.getRating());
-                })
-                .collect(Collectors.toList());
+        return userRating.getRatings().stream().map(rating -> {
+        	Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
+            return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
+        }).collect(Collectors.toList());
 	}
 }
 //return Collections.singletonList(new CatalogItem("Caça Fantasmas", "Filme de Gasparzinho", 8));
@@ -55,3 +49,4 @@ public class CatalogResource {
 //tecnicamente deveria ser criado uma "call" dessas para cada filme avaliado
 //essa função será movida para dentro do retorno para enfim trazer um retorno real
 //fazendo com que o micro service funcione de verdade
+
