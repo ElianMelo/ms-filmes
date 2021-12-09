@@ -11,8 +11,9 @@ public class UserRating {
     public void initData(String userId) {
         this.setUserId(userId);
         this.setRatings(Arrays.asList(
-                new Rating("100", 3),
-                new Rating("550", 4)
+                new Rating("550", 3),
+                new Rating("268", 4),
+                new Rating("78", 5)
         ));
     }
     public String getUserId() {return userId;}
