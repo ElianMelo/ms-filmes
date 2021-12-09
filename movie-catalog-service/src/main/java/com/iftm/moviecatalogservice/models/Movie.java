@@ -7,7 +7,7 @@ public class Movie {
     private String description;
 		
 	//INDICA COMO GERAR UM OBJETO VAZIO DESSA CLASSE QUE DEPOIS SERÁ POPULADO
-	public Movie() {super();}
+	public Movie() {}
 	
 	//AQUI INDICA COMO ESTA CLASSE PODERÁ SER ACESSADA
 	public Movie(String movieId, String nome, String description) {

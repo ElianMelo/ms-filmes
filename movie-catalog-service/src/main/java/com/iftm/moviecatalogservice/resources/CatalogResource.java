@@ -17,11 +17,8 @@ import com.iftm.moviecatalogservice.models.UserRating;
 @RequestMapping("/catalog")
 public class CatalogResource {
 	
-	//o Bean informa que tem algum dado disponível e o Autowired informa que precisa desse dado
 	@Autowired
 	private RestTemplate restTemplate;
-	//o Autowired aqui informa ao Spring que em algum lugar (MovieCatalogServiceApplication)
-	//existe um BEAN desse RestTemplate e o inject precisa desse dado e é injetado aqui
 	
     @RequestMapping("/{userId}")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
@@ -29,11 +26,15 @@ public class CatalogResource {
         UserRating userRating = restTemplate.getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
 
         return userRating.getRatings().stream().map(rating -> {
-        	Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
+            Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
             return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
         }).collect(Collectors.toList());
-	}
+    }
 }
+//o Bean informa que tem algum dado disponível e o Autowired informa que precisa desse dado
+//o Autowired aqui informa ao Spring que em algum lugar (MovieCatalogServiceApplication)
+//existe um BEAN desse RestTemplate e o inject precisa desse dado e é injetado aqui
+
 //return Collections.singletonList(new CatalogItem("Caça Fantasmas", "Filme de Gasparzinho", 8));
 //esse retorno acima foi criado para ele retornar algo "a força" sendo que ainda não temos dados
 
@@ -49,4 +50,5 @@ public class CatalogResource {
 //tecnicamente deveria ser criado uma "call" dessas para cada filme avaliado
 //essa função será movida para dentro do retorno para enfim trazer um retorno real
 //fazendo com que o micro service funcione de verdade
+
 
